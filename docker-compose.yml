@@ -97,6 +97,31 @@ services:
     networks:
       - monitoring-net
 
+  loki:
+    image: grafana/loki:2.9.2
+    container_name: loki_logs
+    restart: always
+    ports:
+      - "3101:3100"
+    volumes:
+      - ./loki/loki-config.yml:/etc/loki/loki-config.yml:ro
+    command: -config.file=/etc/loki/loki-config.yml
+    networks:
+      - monitoring-net
+
+  promtail:
+    image: grafana/promtail:2.9.2
+    container_name: promtail_collector
+    restart: always
+    volumes:
+      - ./promtail/promtail-config.yml:/etc/promtail/promtail-config.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: -config.file=/etc/promtail/promtail-config.yml
+    networks:
+      - monitoring-net
+    depends_on:
+      - loki
+
 volumes:
   db_data:
   wp_data:
