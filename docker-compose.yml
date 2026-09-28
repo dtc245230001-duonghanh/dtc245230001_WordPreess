@@ -101,10 +101,12 @@ services:
     image: grafana/loki:2.9.2
     container_name: loki_logs
     restart: always
+    user: "0:0"
     ports:
       - "3101:3100"
     volumes:
       - ./loki/loki-config.yml:/etc/loki/loki-config.yml:ro
+      - ./loki/data:/tmp/loki
     command: -config.file=/etc/loki/loki-config.yml
     networks:
       - monitoring-net
