@@ -18,11 +18,10 @@ Dự án thực hiện triển khai một hệ thống website quảng bá sản
 -  Grafana Dashboard: http://192.168.36.129:3001 
 -  Prometheus Metrics: http://192.168.36.129:9091
 -  Loki API/Logs: http://192.168.36.129:3101
--  cAdvisor Monitoring: http://192.168.36.129:8080
 
 # 3. Hướng dẫn khởi chạy
 1. Yêu cầu: Đã cài đặt Docker và Docker Compose.
 2. Lệnh khởi chạy toàn bộ hệ thống:
    docker compose up -d
-3. Kiểm tra trạng thái các container
+3. Kiểm tra trạng thái các container:
    docker compose ps
