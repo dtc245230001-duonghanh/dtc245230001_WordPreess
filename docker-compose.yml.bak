@@ -124,32 +124,6 @@ services:
     depends_on:
       - loki
 
-  nginx_exporter:
-    image: nginx/nginx-prometheus-exporter:latest
-    container_name: nginx_exporter
-    restart: always
-    command:
-      - "--nginx.scrape-uri=http://nginx_proxy:8080/stub_status"
-    networks:
-      - frontend-net
-      - monitoring-net
-    depends_on:
-      - nginx
-
-  mysqld_exporter:
-    image: prom/mysqld-exporter:latest
-    container_name: mysqld_exporter
-    restart: always
-    command:
-      - "--config.my-cnf=/etc/mysqld-exporter/.my.cnf"
-    volumes:
-      - ./mysqld-exporter/.my.cnf:/etc/mysqld-exporter/.my.cnf:ro
-    networks:
-      - backend-net
-      - monitoring-net
-    depends_on:
-      - db
-
 volumes:
   db_data:
   wp_data:
